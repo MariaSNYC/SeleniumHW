@@ -40,11 +40,5 @@ public class AdvancedXpath {
 
 
 
-
-
-
-
-
-
     }
 }
