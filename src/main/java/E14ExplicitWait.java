@@ -28,10 +28,9 @@ public class E14ExplicitWait {
 
         WebElement B3 = driver.findElement(By.xpath("//button[@id='checkbox_button']"));
         B3.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='checkbox']")));
+        wait.until(ExpectedConditions.elementToBeSelected(By.xpath("//input[@id='checkbox']")));
         WebElement checkBox = driver.findElement(By.xpath("//input[@id='checkbox']"));
 
-        checkBox.click();
 
         if (checkBox.isSelected()) {
             System.out.println("CheckBox is selected");
