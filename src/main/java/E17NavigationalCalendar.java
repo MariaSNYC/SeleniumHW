@@ -7,42 +7,41 @@ import java.util.List;
 
 public class E17NavigationalCalendar {
     public static void main(String[] args) {
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://syntaxprojects.com/jquery-date-picker-demo-homework.php");
 
-        driver.findElement(By.xpath("//input[@id='from_date']")).click();
+        WebElement calander1 = driver.findElement(By.xpath("//input[@id='from_date']"));
+        calander1.click();
 
-        WebElement month=driver.findElement(By.xpath("//span[@class='ui-datepicker-month']"));
-        String currentMonth=month.getText();
-        WebElement nextBtn= driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']"));
-        boolean notMonth=true;
-
-        while (notMonth){
-
-            if (currentMonth.equals("October 2024")) {
-                List<WebElement> dates = driver.findElements(By.xpath("//table/tbody/tr/td"));
-                for (WebElement date : dates) {
-                    String currentDate = date.getText();
-                    if (currentDate.equals("1")) {
+        String monthvalue = "January";
+        String Yearvalue = "2025";
+        String datevalue = "4";
+        boolean isfound=false;
+        while (!isfound) {
+            WebElement month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']"));
+            WebElement year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']"));
+            String currentMonth = month.getText();
+            String currentYear = year.getText();
+            if (currentMonth.equals(monthvalue) && currentYear.equals(Yearvalue)) {
+                //select the date
+                List<WebElement> allDates = driver.findElements(By.xpath("//table/tbody/tr/td/a"));
+                for(WebElement date:allDates){
+                    if(date.getText().equals(datevalue)){
                         date.click();
-
-
+                        isfound=true;
+                        break;
                     }
+
                 }
-                notMonth=false;
-
-            }else{
-                nextBtn= driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']"));
+            } else {
+                //click on next button
+                WebElement nextBtn = driver.findElement(By.xpath("//span[text()='Next']"));
                 nextBtn.click();
-                currentMonth=month.getText();
-
-
             }
         }
 
-
-
-
     }
-}
+    }
+
